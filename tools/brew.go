@@ -5,7 +5,6 @@ import (
 	"os/exec"
 )
 
-
 func InstallBrew() error {
 	// homebrewがインストールされているか確認
 	_, err := exec.LookPath("brew")
