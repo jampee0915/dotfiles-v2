@@ -12,7 +12,9 @@ func InstallBrew() error {
 		fmt.Println("Installing homebrew...")
 
 		// インストールコマンド
-		exec.Command("/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)").Run()
+		if err := exec.Command("/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)").Run(); err != nil {
+			return err
+		}
 	}
 
 	// 再度homebrewがインストールされているか確認
