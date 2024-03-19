@@ -7,3 +7,4 @@ chmod +x ${DOT_DIR}/dotfiles-script
 
 cd ${DOT_DIR}
 ./dotfiles-script
+touch sample.txt
