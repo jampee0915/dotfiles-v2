@@ -27,7 +27,6 @@ func addTap() error {
 		"homebrew/cask",
 		"homebrew/cask-versions",
 		"homebrew/core",
-		"sdkman/tap",
 	}
 
 	for _, tap := range taps {
@@ -63,7 +62,6 @@ func installBrewPackages() error {
 		"fzf", "awscli", "asdf","kotlin", "gradle",
 		"go", "bat", // cat command alternative
 		"exa", // ls command alternative
-		"sdkman-cli",
 	}
 
 	for _, pkg := range brewPackages {
@@ -87,9 +85,9 @@ func InstallBrew() error {
 		return fmt.Errorf("failed to verify Homebrew installation")
 	}
 
-	if err := addTap(); err != nil {
-		return fmt.Errorf("failed to add brew tap")
-	}
+	// if err := addTap(); err != nil {
+	// 	return fmt.Errorf("failed to add brew tap")
+	// }
 
 	if err := installBrewPackages(); err != nil {
 		return fmt.Errorf("failed to brew package installation")
