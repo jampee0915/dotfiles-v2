@@ -27,6 +27,7 @@ func addTap() error {
 		"homebrew/cask",
 		"homebrew/cask-versions",
 		"homebrew/core",
+		"sdkman/tap",
 	}
 
 	for _, tap := range taps {
@@ -41,7 +42,6 @@ func installCaskApp() error {
 	caskApps := []string{
 		"iterm2",
 		"docker",
-		// "corretto",
 		"visual-studio-code",
 		"karabiner-elements",
 		"hyperswitch",
@@ -60,9 +60,10 @@ func installCaskApp() error {
 func installBrewPackages() error {
 	brewPackages := []string{
 		"ghq", "jq", "peco", "tmux", "zsh", "zplug",
-		"fzf", "awscli", "asdf", "kotlin", "gradle",
+		"fzf", "awscli", "asdf","kotlin", "gradle",
 		"go", "bat", // cat command alternative
 		"exa", // ls command alternative
+		"sdkman-cli",
 	}
 
 	for _, pkg := range brewPackages {
