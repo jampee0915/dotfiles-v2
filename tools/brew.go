@@ -5,35 +5,53 @@ import (
 	"os/exec"
 )
 
-func InstallBrew() error {
-	// homebrewがインストールされているか確認
+const homebrewInstallURL = "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+func checkBrewInstalled() bool {
 	_, err := exec.LookPath("brew")
-	if err != nil {
-		fmt.Println("Installing homebrew...")
+	return err == nil
+}
 
-		// インストールコマンド
-		if err := exec.Command("/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)").Run(); err != nil {
-			return err
-		}
+func installHomebrew() error {
+	fmt.Println("Installing Homebrew...")
+	cmd := exec.Command("/bin/bash", "-c", "$(curl -fsSL "+homebrewInstallURL+" )")
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to install Homebrew: %w", err)
 	}
+	return nil
+}
 
-	// 再度homebrewがインストールされているか確認
-	_, err = exec.LookPath("brew")
-	if err != nil {
-		return err
-	}
-
+func installBrewPackages() error {
 	brewPackages := []string{
-		"ghq",
-		"jq",
-		"peco",
+		"ghq", "jq", "peco", "tmux", "zsh", "zplug",
+		"fzf", "awscli", "asdf", "kotlin", "gradle",
+		"go", "bat", // cat command alternative
+		"exa", // ls command alternative
 	}
 
 	for _, pkg := range brewPackages {
-		fmt.Println("Installing homebrew package: ", pkg)
+		fmt.Printf("Installing Homebrew package: %s\n", pkg)
 		if err := exec.Command("brew", "install", pkg).Run(); err != nil {
+			return fmt.Errorf("failed to install package %s: %w", pkg, err)
+		}
+	}
+
+	return nil
+}
+
+func InstallBrew() error {
+	if !checkBrewInstalled() {
+		if err := installHomebrew(); err != nil {
 			return err
 		}
+	}
+
+	if !checkBrewInstalled() {
+		return fmt.Errorf("failed to verify Homebrew installation")
+	}
+
+	if err := installBrewPackages(); err != nil {
+		return err
 	}
 
 	return nil
