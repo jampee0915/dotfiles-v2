@@ -21,21 +21,21 @@ func installHomebrew() error {
 	return nil
 }
 
-func addTap() error {
-	taps := []string{
-		"homebrew/bundle",
-		"homebrew/cask",
-		"homebrew/cask-versions",
-		"homebrew/core",
-	}
+// func addTap() error {
+// 	taps := []string{
+// 		"homebrew/bundle",
+// 		"homebrew/cask",
+// 		"homebrew/cask-versions",
+// 		"homebrew/core",
+// 	}
 
-	for _, tap := range taps {
-		if err := exec.Command("brew", "tap", tap).Run(); err != nil {
-			return fmt.Errorf("failed to add tap %s: %w", tap, err)	
-		}
-	}
-	return nil
-}
+// 	for _, tap := range taps {
+// 		if err := exec.Command("brew", "tap", tap).Run(); err != nil {
+// 			return fmt.Errorf("failed to add tap %s: %w", tap, err)	
+// 		}
+// 	}
+// 	return nil
+// }
 
 func installCaskApp() error {
 	caskApps := []string{
